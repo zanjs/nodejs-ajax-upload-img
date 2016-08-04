@@ -1,0 +1,18 @@
+{
+  "name": "nodejs-ajax-upload-img",
+  "version": "1.0.0",
+  "description": "用于演示如何使用Node.js和jQuery完成不刷新的文件上传。",
+  "main": "app.js",
+  "scripts": {
+    "dev":"nodemon app.js",
+    "start":"node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-multiparty": "~1.2.5",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0"
+  }
+}

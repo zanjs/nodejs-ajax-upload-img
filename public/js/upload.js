@@ -16,8 +16,9 @@ function uploadFile(){
     processData: false,
     success: function(data){
       if(200 === data.code) {
-        $("#imgShow").attr('src', data.msg.url);
+        // $("#imgShow").attr('src', data.msg.url);
         $("#spanMessage").html("上传成功");
+        getList()
       } else {
         $("#spanMessage").html("上传失败");
       }

@@ -38,15 +38,16 @@ app.post('/upload', multipart(), function(req, res){
   var month= todayDate.getMonth() +1;
   var year= 1900+todayDate.getYear();
   var mkPath = '/file/'+year+ month+'/';
-  var dPath = '/public/'+mkPath;
+  var dPath = '/public'+mkPath;
   getAllFiles(path.dirname(__filename)+'/public/file/',function(fi){
     console.log(fi)
   })
 
   console.log(dPath)
-  MKDirIfNotExist(path.dirname(__filename) + dPath)
+  MKDirIfNotExist(path.dirname(__filename) + dPath);
   var targetPath = path.dirname(__filename) + dPath + filename;
   //copy file
+  console.log(req.files.files)
   fs.createReadStream(req.files.files.ws.path).pipe(fs.createWriteStream(targetPath));
   //return file url
   res.json({code: 200, msg: {url: 'http://' + req.headers.host + mkPath + filename}});
@@ -64,6 +65,21 @@ app.get('/env', function(req, res){
     }
   });
 });
+
+
+app.get('/list', function(req, res){
+
+  var a=[]; 
+  var bp = path.dirname(__filename)+'/public';
+
+  console.log(bp.length)
+ getAllFiles(path.dirname(__filename)+'/public/file/',function(fi){
+    a.push(fi.slice(bp.length,fi.length));
+  })
+
+    res.json({code: 200, msg: a});
+  
+})
 
 /**
  * 获取文件夹下面的所有的文件(包括子文件夹)
